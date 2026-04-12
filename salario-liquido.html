@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculadora de Salário Líquido</title>
 
-  <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -18,7 +17,7 @@
     </h1>
 
     <p class="text-gray-600 mb-6">
-      Descubra quanto você recebe após descontos de INSS e Imposto de Renda.
+      Veja o detalhamento completo dos descontos do seu salário.
     </p>
 
     <div class="mb-4">
@@ -38,16 +37,33 @@
       Calcular
     </button>
 
+    <!-- RESULTADO DETALHADO -->
     <div id="resultado-box" class="mt-6 hidden p-4 bg-green-100 rounded-lg">
-      <h2 class="text-lg font-semibold text-green-800">
-        Resultado:
+
+      <h2 class="text-lg font-semibold text-green-800 mb-4">
+        Resultado detalhado:
       </h2>
-      <p id="resultado" class="text-xl font-bold text-green-900 mt-2"></p>
+
+      <div class="space-y-2 text-gray-800">
+        <p>💰 Salário bruto: <span id="bruto" class="font-semibold"></span></p>
+        <p>📉 INSS: <span id="inss" class="font-semibold"></span></p>
+        <p>📊 Base de cálculo: <span id="base" class="font-semibold"></span></p>
+        <p>🏛️ IR: <span id="ir" class="font-semibold"></span></p>
+        <hr>
+        <p class="text-xl font-bold text-green-900">
+          💵 Salário líquido: <span id="liquido"></span>
+        </p>
+      </div>
+
     </div>
 
   </div>
 
   <script>
+    function formatar(valor) {
+      return "R$ " + valor.toFixed(2);
+    }
+
     function calcular() {
       let salario = parseFloat(document.getElementById("salario").value);
 
@@ -72,8 +88,12 @@
 
       let liquido = salario - inss - ir;
 
-      document.getElementById("resultado").innerText =
-        "R$ " + liquido.toFixed(2);
+      // Preencher valores
+      document.getElementById("bruto").innerText = formatar(salario);
+      document.getElementById("inss").innerText = formatar(inss);
+      document.getElementById("base").innerText = formatar(base);
+      document.getElementById("ir").innerText = formatar(ir);
+      document.getElementById("liquido").innerText = formatar(liquido);
 
       document.getElementById("resultado-box").classList.remove("hidden");
     }
