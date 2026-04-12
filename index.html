@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CalculaFácil</title>
+  <title>Calculadoras Financeiras Online (Salário, CDI, Juros)</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-gray-100">
 
+  <!-- NAVBAR -->
   <nav class="bg-white shadow-md p-4">
-    <div class="max-w-5xl mx-auto flex justify-between">
+    <div class="max-w-5xl mx-auto flex justify-between items-center">
       <h1 class="font-bold text-lg">💰 CalculaFácil</h1>
       <div class="space-x-4">
         <a href="index.html" class="text-blue-600">Home</a>
@@ -22,29 +23,57 @@
     </div>
   </nav>
 
-  <main class="max-w-5xl mx-auto mt-10">
+  <!-- HERO -->
+  <section class="max-w-5xl mx-auto mt-10 text-center">
+    <h1 class="text-3xl font-bold mb-4">
+      Calculadoras Financeiras Simples e Rápidas
+    </h1>
+    <p class="text-gray-600 mb-6">
+      Descubra seu salário líquido, simule investimentos e tome melhores decisões financeiras.
+    </p>
+  </section>
 
-    <h2 class="text-3xl font-bold mb-6 text-center">
-      Calculadoras Financeiras
+  <!-- CARDS -->
+  <section class="max-w-5xl mx-auto mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <a href="calculadora-salario-liquido.html" class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+      <h2 class="font-bold text-lg mb-2">Salário Líquido</h2>
+      <p class="text-gray-600">Veja quanto você recebe após impostos</p>
+    </a>
+
+    <a href="cdi.html" class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+      <h2 class="font-bold text-lg mb-2">Rendimento CDI</h2>
+      <p class="text-gray-600">Simule seus investimentos</p>
+    </a>
+
+    <a href="juros-compostos.html" class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+      <h2 class="font-bold text-lg mb-2">Juros Compostos</h2>
+      <p class="text-gray-600">Veja o crescimento do seu dinheiro</p>
+    </a>
+
+  </section>
+
+  <!-- SEO TEXT -->
+  <section class="max-w-3xl mx-auto mt-12 text-gray-700">
+
+    <h2 class="text-xl font-bold mb-4">
+      Calculadoras financeiras online gratuitas
     </h2>
 
-    <div class="grid md:grid-cols-3 gap-6">
+    <p class="mb-4">
+      Utilize nossas calculadoras financeiras para simular salário líquido, investimentos e juros compostos de forma rápida e gratuita.
+    </p>
 
-      <a href="calculadora-salario-liquido.html" class="bg-white p-6 rounded-xl shadow hover:shadow-lg">
-        Salário Líquido
-      </a>
+    <p class="mb-4">
+      Todas as ferramentas são simples de usar e ajudam você a tomar decisões financeiras melhores no dia a dia.
+    </p>
 
-      <a href="cdi.html" class="bg-white p-6 rounded-xl shadow hover:shadow-lg">
-        CDI
-      </a>
+  </section>
 
-      <a href="juros-compostos.html" class="bg-white p-6 rounded-xl shadow hover:shadow-lg">
-        Juros Compostos
-      </a>
-
-    </div>
-
-  </main>
+  <!-- FOOTER -->
+  <footer class="text-center text-gray-500 mt-10 mb-6">
+    © 2026 CalculaFácil
+  </footer>
 
 </body>
 </html>
