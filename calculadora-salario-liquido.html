@@ -172,8 +172,9 @@
       
       if (salario < 5000.01) {
         ir = 0;
-      } else if (salario < 5180.19) {
-        ir = base * 0.225 - 675.49 - (978.62 - salario * 0.133145);
+      } else if (salario < 5271.88) {
+        ir = base - 607.20 - (978.62 - salario * 0.133145);
+        //R$ 607,20 é um redutor da própria receita. Considera-se o maior redutor entre esse e o INSS
       } else if (salario < 7350.01) {
         ir = base * 0.275 - 908.73 - (978.62 - salario * 0.133145);
       } else if (salario > 7350.00) {
