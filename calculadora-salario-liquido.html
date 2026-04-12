@@ -157,17 +157,24 @@
       // Base de cálculo
       let base = salario - inss;
 
-      // IR simplificado
+      // IR
       let ir = 0;
 
-      if (base > 4664) {
-        ir = base * 0.275;
-      } else if (base > 3751) {
-        ir = base * 0.225;
-      } else if (base > 2826) {
-        ir = base * 0.15;
-      } else if (base > 1903) {
-        ir = base * 0.075;
+//Rendimentos tributáveis mensais	// Redução do imposto (atenção, a base de cálculo da isenção é o salário, enquanto acima de R$ 7.350, é o salário deduzido da contribuição para o INSS)
+//Até R$ 5 mil
+//Até R$ 312,89, zerando o imposto
+//De R$ 5.000,01 a R$ 7.350
+//R$ 978,62 – (0,133145 × renda mensal), até zerar para quem ganha R$ 7.350
+//A partir de R$ 7.350,01	Sem redução
+//Tabela sem redução:   
+//Acima de R$ 4.664,68	27,5%	R$ 908,73
+      
+      if (salario < 5000.01) {
+        ir = 0;
+      } else if (salario < 7350.01) {
+        ir = 978.62 - salario * 0.133145;
+      } else if (salario > 7350.00) {
+        ir = base * 0.275 - 908.73;
       }
 
       let liquido = salario - inss - ir;
