@@ -60,9 +60,12 @@
   </div>
 
   <script>
-    function formatar(valor) {
-      return "R$ " + valor.toFixed(2);
-    }
+function formatar(valor) {
+  return valor.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL"
+  });
+}
 
     function calcular() {
       let salario = parseFloat(document.getElementById("salario").value);
