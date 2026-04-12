@@ -161,6 +161,7 @@
       let ir = 0;
 
 //Rendimentos tributáveis mensais	// Redução do imposto (atenção, a base de cálculo da isenção é o salário, enquanto acima de R$ 7.350, é o salário deduzido da contribuição para o INSS)
+//Para calcular o IR até R$ 7.350, calcula-se primeiro o IR devido de acordo com a tabela normal e depois se aplica a fórmula abaixo para fazer a dedução do valor)
 //Até R$ 5 mil
 //Até R$ 312,89, zerando o imposto
 //De R$ 5.000,01 a R$ 7.350
@@ -172,7 +173,7 @@
       if (salario < 5000.01) {
         ir = 0;
       } else if (salario < 7350.01) {
-        ir = 978.62 - salario * 0.133145;
+        ir = base * 0.275 - 908.73 - (978.62 - salario * 0.133145);
       } else if (salario > 7350.00) {
         ir = base * 0.275 - 908.73;
       }
