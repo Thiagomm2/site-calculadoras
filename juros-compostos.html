@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juros Compostos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+  <div class="max-w-2xl mx-auto mt-10 p-6 bg-white rounded shadow">
+
+    <h1 class="text-2xl font-bold mb-4">Juros Compostos</h1>
+
+    <input id="valor" type="number" placeholder="Valor inicial"
+      class="w-full p-3 border mb-3">
+
+    <input id="taxa" type="number" placeholder="Taxa mensal (%)"
+      class="w-full p-3 border mb-3">
+
+    <input id="meses" type="number" placeholder="Meses"
+      class="w-full p-3 border mb-3">
+
+    <button onclick="calcular()" class="w-full bg-blue-600 text-white p-3">
+      Calcular
+    </button>
+
+    <p id="resultado" class="mt-4 text-xl font-bold"></p>
+
+  </div>
+
+  <script>
+    function formatar(valor) {
+      return valor.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+      });
+    }
+
+    function calcular() {
+      let v = parseFloat(document.getElementById("valor").value);
+      let t = parseFloat(document.getElementById("taxa").value) / 100;
+      let m = parseInt(document.getElementById("meses").value);
+
+      let final = v * Math.pow(1 + t, m);
+
+      document.getElementById("resultado").innerText =
+        "Valor final: " + formatar(final);
+    }
+  </script>
+
+</body>
+</html>
