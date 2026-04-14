@@ -1,122 +1,524 @@
-<main class="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-2xl shadow-lg">
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Salário Líquido CLT 2026 (Atualizada)</title>
 
-  <h1 class="text-3xl font-extrabold text-gray-800 mb-2">
-    Calculadora de Salário Líquido CLT 2026: Tabelas e Descontos
-  </h1>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
 
-  <p class="text-gray-500 mb-8 text-lg">
-    Descubra o valor real que você recebe após os descontos de <strong>INSS e Imposto de Renda</strong> atualizados para 2026.
-  </p>
+<body class="bg-gray-100">
 
-  <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 mb-10">
-    <div class="mb-4">
-      <label class="block text-sm font-medium text-gray-700 mb-2">Digite o Salário Bruto Mensal</label>
-      <div class="relative">
-        <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">R$</span>
-        <input 
-          type="number" 
-          id="salario" 
-          placeholder="Ex: 5000"
-          class="w-full pl-10 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
-        />
+  <!-- NAVBAR -->
+  <nav class="bg-white shadow-md p-4">
+    <div class="max-w-5xl mx-auto flex justify-between">
+      <a href="index.html" class="font-bold text-lg hover:text-blue-600">
+  💰 CalculaFácil
+</a>
+      <div class="space-x-4">
+        <a href="index.html" class="hover:text-blue-600">Home</a>
+        <a href="salario-liquido.html" class="text-blue-600">Salário</a>
+        <a href="cdi.html" class="hover:text-blue-600">CDI</a>
+        <a href="juros-compostos.html" class="hover:text-blue-600">Juros</a>
       </div>
+    </div>
+  </nav>
+
+  <!-- CONTEÚDO -->
+  <main class="max-w-2xl mx-auto mt-10 p-6 bg-white rounded-2xl shadow-lg">
+
+    <h1 class="text-2xl font-bold mb-4">
+      Calculadora de Salário Líquido
+    </h1>
+
+    <p class="text-gray-600 mb-6">
+      Veja o detalhamento completo dos descontos do seu salário bruto e descubra seu salário líquido em 2026.
+    </p>
+
+    <div class="mb-4">
+      <label class="block text-gray-700 mb-2">Salário bruto (R$)</label>
+      <input 
+        type="number" 
+        id="salario" 
+        placeholder="Ex: 5000"
+        class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
     </div>
 
     <button 
       onclick="calcular()"
-      class="w-full bg-blue-600 text-white p-4 rounded-lg font-bold hover:bg-blue-700 transition-all"
+      class="w-full bg-blue-600 text-white p-3 rounded-lg font-semibold hover:bg-blue-700 transition"
     >
-      Calcular Salário Líquido
+      Calcular
     </button>
 
-    <div id="resultado-box" class="mt-8 hidden p-6 bg-green-50 border-2 border-green-200 rounded-xl">
-      <h2 class="text-xl font-bold text-green-800 mb-4">Detalhamento do Cálculo:</h2>
-      <div class="space-y-2 text-gray-700">
-        <p class="flex justify-between"><span>💰 Salário Bruto:</span> <span id="bruto" class="font-semibold"></span></p>
-        <p class="flex justify-between"><span>📉 Desconto INSS:</span> <span id="inss" class="font-semibold text-red-600"></span></p>
-        <p class="flex justify-between"><span>📊 Base de Cálculo IR:</span> <span id="base" class="font-semibold"></span></p>
-        <p class="flex justify-between border-b pb-2"><span>🏛️ Imposto de Renda:</span> <span id="ir" class="font-semibold text-red-600"></span></p>
-        <p class="flex justify-between text-xl font-bold text-green-900 pt-2">
-          <span>💵 Salário Líquido:</span> <span id="liquido"></span>
+    <!-- RESULTADO -->
+    <div id="resultado-box" class="mt-6 hidden p-4 bg-green-100 rounded-lg">
+
+      <h2 class="text-lg font-semibold text-green-800 mb-4">
+        Resultado detalhado:
+      </h2>
+
+      <div class="space-y-2 text-gray-800">
+        <p>💰 Salário bruto: <span id="bruto" class="font-semibold"></span></p>
+        <p>📉 INSS: <span id="inss" class="font-semibold"></span></p>
+        <p>📊 Base de cálculo: <span id="base" class="font-semibold"></span></p>
+        <p>🏛️ IR: <span id="ir" class="font-semibold"></span></p>
+        <hr>
+        <p class="text-xl font-bold text-green-900">
+          💵 Salário líquido: <span id="liquido"></span>
         </p>
       </div>
+
     </div>
-  </div>
 
-  <section class="space-y-10">
+    <section class="mt-10 text-gray-700">
+
+  <h2 class="text-xl font-bold mb-4">
+    Como calcular o salário líquido?
+  </h2>
+
+  <p class="mb-4">
+    O salário líquido é o valor que você recebe após os descontos obrigatórios,
+    como INSS e Imposto de Renda.
+  </p>
+
+  <p class="mb-4">
+    Primeiro, é feito o desconto do INSS sobre o salário bruto. Em seguida,
+    o Imposto de Renda é calculado com base no valor restante.
+  </p>
+
+  <h3 class="text-lg font-semibold mt-6 mb-2">
+    Quais são os descontos do salário?
+  </h3>
+
+  <ul class="list-disc ml-6 mb-4">
+    <li>INSS (Previdência)</li>
+    <li>Imposto de Renda</li>
+    <li>Outros descontos (dependendo da empresa)</li>
+  </ul>
+
+  <h3 class="text-lg font-semibold mt-6 mb-2">
+    Esta calculadora é precisa?
+  </h3>
+
+  <p>
+    Esta calculadora fornece uma estimativa baseada nas regras atuais.
+    Para valores exatos, consulte um contador ou o RH da sua empresa.
+  </p>
+
+<section class="mt-10 text-gray-700">
+
+  
+  <h2 class="text-xl font-bold mb-4">
+    Tabela do INSS 2026
+  </h2>
+
+  <table class="w-full border border-gray-300 mb-6">
+    <thead class="bg-gray-100">
+      <tr>
+        <th class="p-2 border">Faixa salarial</th>
+        <th class="p-2 border">Alíquota</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="p-2 border">Até R$ 1.621,00</td>
+        <td class="p-2 border">7,5%</td>
+      </tr>
+      <tr>
+        <td class="p-2 border">De R$ 1.621,01 até R$ 2.902,84</td>
+        <td class="p-2 border">9%</td>
+      </tr>
+      <tr>
+        <td class="p-2 border">De R$ 2.902,85 até R$ 4.354,27</td>
+        <td class="p-2 border">12%</td>
+      </tr>
+      <tr>
+        <td class="p-2 border">De R$ 4.354,28 até R$ 8.475,55</td>
+        <td class="p-2 border">14%</td>
+      </tr>
+    </tbody>
+  </table>
+
+<p class="text-sm text-gray-500 mt-2">
+  Fonte: 
+  <a href="https://www.gov.br/inss/pt-br/assuntos/com-reajuste-de-3-9-teto-do-inss-chega-a-r-8-475-55-em-2026" 
+     target="_blank" 
+     class="text-blue-600 underline">
+     Instituto Nacional de Seguridade Social - INSS
     
-    <article>
-      <h2 class="text-2xl font-bold text-gray-800 mb-4">Como calcular o salário líquido em 2026?</h2>
-      <p class="text-gray-600 leading-relaxed mb-4">
-        O cálculo do <strong>salário líquido</strong> envolve a dedução de tributos obrigatórios diretamente na folha de pagamento. Para chegar ao resultado, a calculadora realiza os seguintes passos:
-      </p>
-      <ol class="list-decimal ml-6 space-y-2 text-gray-700">
-        <li>Apurar o <strong>Salário Bruto</strong> (valor total sem descontos).</li>
-        <li>Subtrair o <strong>INSS</strong> de acordo com a tabela progressiva.</li>
-        <li>Definir a base de cálculo do <strong>IRRF (Imposto de Renda Retido na Fonte)</strong>.</li>
-        <li>Aplicar a alíquota de IR e subtrair a parcela a deduzir.</li>
-      </ol>
-    </article>
+  </a>
+</p>
+  
+    <h3 class="text-lg font-semibold mt-4">
+    Como funciona o cálculo do INSS?
+  </h3>
 
-    <article class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-      <h2 class="text-xl font-bold text-gray-800 mb-4 border-l-4 border-blue-600 pl-3">Tabela INSS 2026: Alíquotas Progressivas</h2>
-      <p class="text-sm text-gray-600 mb-4">Confira as faixas de contribuição para a Previdência Social no ano-base 2026:</p>
+  <p class="mt-4">
+    O INSS não é calculado aplicando uma única alíquota sobre todo o salário.
+    O cálculo é progressivo, ou seja, cada faixa salarial tem uma alíquota diferente.
+  </p>
+
+  <p class="mt-4">
+    Isso significa que partes do salário são tributadas com percentuais diferentes,
+    respeitando os limites de cada faixa.
+  </p>
+
+  <h4 class="font-semibold mt-2">
+    Exemplo prático (salário de R$ 9.000,00):
+  </h4>
+
+  <ul class="list-disc ml-6 mt-4">
+    <li>7,5% sobre R$ 1.621,00</li>
+    <li>9% sobre R$ 1.281,84</li>
+    <li>12% sobre R$ 1.451,43</li>
+    <li>14% sobre R$ 4.121,28 (até o teto do INSS)</li>
+  </ul>
+
+  <p class="mt-4">
+    Mesmo que o salário seja maior que o teto (R$ 8.475,55), o valor máximo de contribuição
+    será limitado a esse valor.
+  </p>
+
+</section>
+
+
+<section class="mt-10 text-gray-700">
+
+  <h2 class="text-xl font-bold mb-4">
+    Tabela do Imposto de Renda 2026
+  </h2>
+
+  <table class="w-full border border-gray-300 mb-6">
+    <thead class="bg-gray-100">
+      <tr>
+        <th class="p-2 border">Faixa de renda</th>
+        <th class="p-2 border">Alíquota</th>
+        <th class="p-2 border">Dedução</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="p-2 border">Até R$ 2.428,80</td>
+        <td class="p-2 border">0%</td>
+        <td class="p-2 border">R$ 0,00</td>
+      </tr>
+      <tr>
+        <td class="p-2 border">De R$ 2.428,81 até R$ 2.826,65</td>
+        <td class="p-2 border">7,5%</td>
+        <td class="p-2 border">R$ 182,16</td>
+      </tr>
+      <tr>
+        <td class="p-2 border">De R$ 2.826,66 até R$ 3.751,05</td>
+        <td class="p-2 border">15%</td>
+        <td class="p-2 border">R$ 394,16</td>
+      </tr>
+      <tr>
+        <td class="p-2 border">De R$ 3.751,06 até R$ 4.664,68</td>
+        <td class="p-2 border">22,5%</td>
+        <td class="p-2 border">R$ 675,49</td>
+      </tr>
+      <tr>
+        <td class="p-2 border">Acima de R$ 4.664,68</td>
+        <td class="p-2 border">27,5%</td>
+        <td class="p-2 border">R$ 908,73</td>
+      </tr>
+    </tbody>
+  </table>
+
+<p class="text-sm text-gray-500 mt-2">
+  Fonte: 
+  <a href="https://www.gov.br/receitafederal/pt-br/assuntos/meu-imposto-de-renda/tabelas/2026" 
+     target="_blank" 
+     class="text-blue-600 underline">
+     Receita Federal
+    
+  </a>
+</p>
+
+    <h3 class="text-lg font-semibold mt-10">
+    Como calcular o Imposto de Renda?
+  </h3>
+
+  <p class="mt-4">
+    O Imposto de Renda é calculado sobre a base de cálculo, que corresponde ao
+    salário bruto menos a contribuição ao INSS.
+  </p>
+
+  <p class="mt-4">
+    Diferente do INSS, o IR utiliza uma alíquota única para cada faixa,
+    mas aplica uma parcela de dedução para ajustar o valor final.
+  </p>
+
+  <h4 class="font-semibold mt-6">
+    Exemplo prático:
+  </h4>
+
+  <p class="mt-4">
+    Se a base de cálculo for R$ 5.000,00, aplica-se a alíquota de 27,5% e
+    subtrai-se a dedução de R$ 908,73:
+  </p>
+
+    <p class="mt-4">
+    Esse modelo simplifica o cálculo e garante que a tributação seja progressiva.
       
-      <table class="w-full text-sm text-left border-collapse">
-        <thead class="bg-gray-100 text-gray-600 uppercase text-xs">
-          <tr>
-            <th class="p-3 border">Faixa Salarial</th>
-            <th class="p-3 border">Alíquota</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y text-gray-700">
-          <tr><td class="p-3 border">Até R$ 1.621,00</td><td class="p-3 border font-semibold">7,5%</td></tr>
-          <tr><td class="p-3 border">De R$ 1.621,01 até R$ 2.902,84</td><td class="p-3 border font-semibold">9%</td></tr>
-          <tr><td class="p-3 border">De R$ 2.902,85 até R$ 4.354,27</td><td class="p-3 border font-semibold">12%</td></tr>
-          <tr><td class="p-3 border text-blue-800 font-medium italic italic">Teto do INSS: R$ 8.475,55</td><td class="p-3 border font-semibold">14%</td></tr>
-        </tbody>
-      </table>
-      <p class="text-xs text-gray-400 mt-2 font-medium">Fonte: Portal Oficial do Governo - INSS 2026</p>
-    </article>
+  </p>
 
-    <article class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-      <h2 class="text-xl font-bold text-gray-800 mb-4 border-l-4 border-indigo-600 pl-3">Imposto de Renda 2026 e Regra de Isenção</h2>
-      <p class="text-gray-600 mb-6">
-        A grande novidade para 2026 é a <strong>isenção de IR para quem ganha até R$ 5.000,00</strong>. Para salários superiores, utiliza-se a tabela abaixo combinada com o desconto simplificado.
-      </p>
+    <h3 class="text-lg font-semibold mt-8">
+    Dedução simplificada do Imposto de Renda
+  </h3>
 
-      <div class="bg-indigo-50 p-4 rounded-lg mb-6 border border-indigo-100">
-        <h3 class="font-bold text-indigo-900 mb-2">💡 O que é o Desconto Simplificado?</h3>
-        <p class="text-sm text-indigo-800">
-          É um mecanismo que permite reduzir a base de cálculo em <strong>R$ 607,20</strong>. Nossa calculadora compara automaticamente se é melhor usar esse desconto ou as deduções por dependentes/INSS para reduzir seu imposto.
-        </p>
-      </div>
+    <p class="mt-4">
+    A Receita Federal tem um mecanismo de desconto simplificado que equivale a 25% da primeira faixa do Imposto de Renda.
+    Para 2026, o desconto simplificado do Imposto de Renda é de R$ 607,20.
+      
+  </p>
 
-      <h3 class="font-bold text-gray-700 mb-3">Tabela de Redução do Imposto (Progressiva)</h3>
-      <div class="overflow-x-auto">
-        <table class="w-full text-sm border">
-          <tr class="bg-gray-50 font-bold text-gray-600">
-            <td class="p-2 border">Rendimentos</td>
-            <td class="p-2 border">Redução Aplicada</td>
-          </tr>
-          <tr>
-            <td class="p-2 border">Até R$ 5.000,00</td>
-            <td class="p-2 border text-green-700 font-bold italic underline">Imposto Zero (Isenção Total)</td>
-          </tr>
-          <tr>
-            <td class="p-2 border">De R$ 5.000,01 a R$ 7.350,00</td>
-            <td class="p-2 border font-mono text-xs">R$ 978,62 - (0,133145 × rendimento)</td>
-          </tr>
-        </table>
-      </div>
-    </article>
+  <h4 class="font-semibold mt-6">
+    O que isso significa e exemplo prático:
+  </h4>
 
-    <article class="text-center p-6 bg-gray-100 rounded-xl">
-      <h3 class="text-lg font-bold text-gray-800">Esta calculadora de salário líquido é precisa?</h3>
-      <p class="text-sm text-gray-600 mt-2 italic">
-        Sim, os algoritmos seguem rigorosamente as normas da <strong>Receita Federal</strong> e do <strong>Governo Federal</strong> para o ano de 2026. Note que benefícios específicos (VR, VT, Planos de Saúde) variam conforme o contrato de trabalho.
-      </p>
-    </article>
+    <p class="mt-4">
+    Voltando no exemplo do INSS, que é um redutor da base de cálculo do Imposto de Renda, no exemplo de um salário de
+    R$ 4.000,00 mensais, o INSS devido seria de R$ 368,60. Porém, como ele é menor que o desconto simplificado
+    de R$ 607,20, utiliza-se o desconto simplificado como redutor da base de cálculo do Imposto de Renda:
+      
+  </p>  
 
-  </section>
-</main>
+<style>
+  .ir-container {
+    font-family: Arial, sans-serif;
+    max-width: 700px;
+  }
+
+  .ir-title {
+    margin: 20px 0 10px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .ir-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+  }
+
+  .ir-table th {
+    background-color: #f5f7fa;
+    font-weight: 600;
+  }
+
+  .ir-table th,
+  .ir-table td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+  }
+
+  .ir-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .highlight {
+    color: #2e7d32;
+    font-weight: bold;
+  }
+</style>
+
+<div class="ir-container">
+
+  <div class="ir-title">Sem o desconto simplificado</div>
+  <table class="ir-table">
+    <tr>
+      <th>Salário</th>
+      <th>INSS</th>
+      <th>Base de Cálculo do IR</th>
+      <th>IR devido</th>
+    </tr>
+    <tr>
+      <td>R$ 4.000,00</td>
+      <td>R$ 368,60</td>
+      <td>R$ 3.631,40</td>
+      <td>R$ 150,55</td>
+    </tr>
+  </table>
+
+  <div class="ir-title">
+    Com o desconto simplificado <span style="font-weight: normal;">(redução de R$ 607,20)</span>
+  </div>
+  <table class="ir-table">
+    <tr>
+      <th>Salário</th>
+      <th>INSS</th>
+      <th>Base de Cálculo do IR</th>
+      <th>IR devido</th>
+    </tr>
+    <tr>
+      <td>R$ 4.000,00</td>
+      <td>R$ 368,60</td>
+      <td class="highlight">R$ 3.392,80</td>
+      <td class="highlight">R$ 114,76</td>
+    </tr>
+  </table>
+
+    <h3 class="text-lg font-bold mt-10">
+    Mas e a isenção de Imposto de Renda para salários de até R$ 5.000,00
+  </h3>
+
+    <p class="mt-4">
+    Em 2026 o governo introduziu a nova regra de isenção de Imposto de Renda Pessoa Física para salários de até R$ 5.000,00, além de descontos para quem ganha até R$ 7.350,00.
+      
+  </p>  
+
+      <p class="mt-2 mb-4">
+    Para entender o cálculo temos a tabela abaixo:
+      
+  </p>  
+
+  <div class="ir-title">Tabela de Redução do Imposto</div>
+<table class="ir-table">
+  <tr>
+    <th>Rendimentos Tributáveis</th>
+    <th>Redução do Imposto</th>
+  </tr>
+
+  <tr>
+    <td>até R$ 5.000,00</td>
+    <td>
+      até R$ 312,89<br>
+      <span style="font-size: 12px; color: #666;">
+        (imposto devido = zero)
+      </span>
+    </td>
+  </tr>
+
+  <tr>
+    <td>de R$ 5.000,01 até R$ 7.350,00</td>
+    <td>
+      R$ 978,62 - (0,133145 × rendimento)<br>
+      <span style="font-size: 12px; color: #666;">
+        redução decrescente até zerar
+      </span>
+    </td>
+  </tr>
+
+  <tr>
+    <td>acima de R$ 7.350,00</td>
+    <td>
+      sem redução
+    </td>
+  </tr>
+</table>
+
+    <p class="mt-4">
+    Voltando ao exemplo anterior, com um salário de R$ 4.000,00, vimos que o Imposto de Renda devido seria de R$ 114,76. Porém, aplicando a tabela acima, temos um desconto de até R$ 312,89 para quem ganha até R$ 5.000,00, zerando assim todo o imposto devido.
+      
+  </p>  
+
+
+  
+</section>
+
+
+      
+</section>
+    
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="text-center text-gray-500 mt-10 mb-6">
+    © 2026 CalculaFácil
+  </footer>
+
+  <script>
+    function formatar(valor) {
+      return valor.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+      });
+    }
+
+    function calcular() {
+      let salario = parseFloat(document.getElementById("salario").value);
+
+      if (!salario) {
+        alert("Digite um valor válido.");
+        return;
+      }
+
+      // INSS 
+      let inss = 0;
+//Faixa salarial	Alíquota INSS (%)
+//até R$ 1.621,00	7,50
+//de R$ 1.621,01 até R$ 2.902,84	9,00
+//de R$ 2.902,85 até R$ 4.354,27	12,00
+//de R$ 4.354,28 até R$ 8.475,55	14,00
+
+      
+      if (salario > 8475.54) {
+        inss = 1621 * 0.075 + (2902.84 - 1621) * 0.09 + (4354.27 - 2902.84) * 0.12 + (8475.55 - 4354.27) * 0.14;
+      } else if (salario > 4354.27) {
+        inss = 1621 * 0.075 + (2902.84 - 1621) * 0.09 + (4354.27 - 2902.84) * 0.12 + (salario - 4354.27) * 0.14;
+      } else if (salario > 2902.84) {
+        inss = 1621 * 0.075 + (2902.84 - 1621) * 0.09 + (salario - 2902.84) * 0.12;
+      } else if (salario > 1621) {
+        inss = 1621 * 0.075 + (salario - 1621) * 0.09;
+      } else if (salario > 0) {
+        inss = salario * 0.075;
+      };
+
+      // Base de cálculo
+      let base = salario - inss;
+
+      // IR
+      let ir = 0;
+
+//Rendimentos tributáveis mensais	// Redução do imposto (atenção, a base de cálculo da isenção é o salário, enquanto acima de R$ 7.350, é o salário deduzido da contribuição para o INSS)
+//Para calcular o IR até R$ 7.350, calcula-se primeiro o IR devido de acordo com a tabela normal e depois se aplica a fórmula abaixo para fazer a dedução do valor)
+//Até R$ 5 mil
+//Até R$ 312,89, zerando o imposto
+//De R$ 5.000,01 a R$ 7.350
+//R$ 978,62 – (0,133145 × renda mensal), até zerar para quem ganha R$ 7.350
+//A partir de R$ 7.350,01	Sem redução
+//Tabela sem redução:   
+//Acima de R$ 4.664,68	27,5%	R$ 908,73
+      
+    if (salario < 5000.01) {
+  ir = 0;
+
+} else if (salario < 5271.88) {
+  ir = (salario - 607.20) * 0.225 - 675.49 - (978.62 - salario * 0.133145);
+//R$ 607,20 é um redutor da própria receita. Considera-se o maior redutor entre esse e o INSS
+} else if (salario < 7350.01) {
+
+  if (inss > 607.20) {
+    ir = base * 0.275 - 908.73 - (978.62 - salario * 0.133145);
+
+  } else if (inss < 607.21) {
+    ir = (salario - 607.20) * 0.275 - 908.73 - (978.62 - salario * 0.133145);
+  }
+
+} else if (salario > 7350.00) {
+  ir = base * 0.275 - 908.73;
+}
+
+      let liquido = salario - inss - ir;
+
+      // Preencher valores
+      document.getElementById("bruto").innerText = formatar(salario);
+      document.getElementById("inss").innerText = formatar(inss);
+      document.getElementById("base").innerText = formatar(base);
+      document.getElementById("ir").innerText = formatar(ir);
+      document.getElementById("liquido").innerText = formatar(liquido);
+
+      document.getElementById("resultado-box").classList.remove("hidden");
+    }
+  </script>
+
+</body>
+</html>
