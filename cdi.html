@@ -59,8 +59,10 @@
       let taxa = parseFloat(document.getElementById("taxa").value) / 100;
       let meses = parseInt(document.getElementById("meses").value);
 
-      let cdi = 0.13; // 13% ao ano (exemplo)
-      let rendimento = valor * Math.pow(1 + (cdi * taxa / 12), meses);
+      let cdi = 0.1465; // 14,65% ao ano (exemplo)
+      let CdiDia = Math.pow(1 + cdi,  1 / 252) - 1;
+      let CdiPercentualMensal = Math.pow( 1 + CdiDia * taxa,21)
+      let rendimento = valor * (Math.pow(CdiPercentualMensal, meses) - 1);
 
       document.getElementById("resultado").innerText =
         "Valor final: " + formatar(rendimento);
